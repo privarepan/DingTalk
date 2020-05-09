@@ -9,7 +9,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Log;
+use Monolog\Formatter\JsonFormatter;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use ThinkCar\DingTalk\Robot\Message\Message;
+use ThinkCar\DingTalk\Support\Response;
 
 class DingTalkRobotClient
 {
@@ -26,15 +30,27 @@ class DingTalkRobotClient
      * @var $request Request
      */
     protected $request;
+    /**
+     * @var $logger Logger
+     */
+    protected $logger;
     protected $base_uri = 'https://oapi.dingtalk.com/robot';
 
     public function __construct()
     {
         $default = config('ding.robot.default');
         $config = config('ding.robot.'.$default);
-        $query = $this->buildSign($config);
-        $this->sign = $query;
+        $this->buildSign($config);
+        $this->registerLogger(config('ding.log.robot'));
         $this->client = app('ding.http');
+    }
+
+    protected function registerLogger($config)
+    {
+        $this->logger = new Logger($config['channel_name']);
+        $handler = new StreamHandler($config['path'],$config['level']);
+        $handler->setFormatter(new JsonFormatter());
+        $this->logger->pushHandler($handler);
     }
 
     /** 切换机器人 通过配置文件里面name
@@ -62,6 +78,7 @@ class DingTalkRobotClient
         $sign = hash_hmac("sha256",$timestamp."\n".$secret,$secret,true);
         $config['timestamp'] = $timestamp;
         $config['sign'] = base64_encode($sign);
+        $this->sign = $config;
         return $config;
     }
 
@@ -75,9 +92,9 @@ class DingTalkRobotClient
         return $request;
     }
 
-    /** 推送消息
+    /**推送消息
      * @param Message $message
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Support\Collection|Response
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function push(Message $message)
@@ -90,7 +107,8 @@ class DingTalkRobotClient
         } catch (RequestException $exception) {
             if ($exception->hasResponse()) {
                 $exception->getResponse()->getBody()->getContents();
-                Log::error("钉钉机器人消息推送错误",[$exception]);
+                $this->logger->info("钉钉机器人消息推送错误",[$exception]);
+                return new Response();
             }
         }
     }

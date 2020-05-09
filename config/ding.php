@@ -17,4 +17,17 @@ return [
     'http' => [
         'timeout' => env('DT_TIMEOUT',2),
     ],
+
+    'log' => [
+        'robot' => [
+            'level' => \Monolog\Logger::INFO,
+            'channel_name' => 'robot',
+            'path' => storage_path('logs/ding-talk/robot.log')
+        ],
+        'work-notice' => [
+            'level' => \Monolog\Logger::INFO,
+            'channel_name' => 'work-notice',
+            'path' => storage_path('logs/ding-talk/work-notice.log')
+        ]
+    ]
 ];
