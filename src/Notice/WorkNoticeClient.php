@@ -64,8 +64,8 @@ class WorkNoticeClient
             if ($exception->hasResponse()) {
                 $exception->getResponse()->getBody()->getContents();
                 $this->logger->info("钉钉工作消息推送错误",[$exception]);
-                return new Response();
             }
+            return new Response();
         }
 
     }

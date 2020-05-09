@@ -6,7 +6,7 @@ class Response
 {
     protected $response;
 
-    public function __construct($data = '')
+    public function __construct(string $data = '')
     {
         $result = json_decode($data, true) ?? [];
         $this->response = collect($result);

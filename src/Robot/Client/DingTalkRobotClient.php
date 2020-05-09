@@ -102,14 +102,14 @@ class DingTalkRobotClient
         $request = $this->setRequest($message,'post','/send');
         try {
             $response = $this->client->send($request, ['query' => $this->sign]);
-            $data = json_decode($response->getBody()->getContents(),true);
-            return collect($data) ;
+            $data = $response->getBody()->getContents();
+            return new Response($data);
         } catch (RequestException $exception) {
             if ($exception->hasResponse()) {
                 $exception->getResponse()->getBody()->getContents();
                 $this->logger->info("钉钉机器人消息推送错误",[$exception]);
-                return new Response();
             }
+            return new Response();
         }
     }
 }
