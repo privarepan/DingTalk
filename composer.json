@@ -1,0 +1,33 @@
+{
+    "name": "thinkcar/dingtalk",
+    "description": "这是一个钉钉tool",
+    "authors": [
+        {
+            "name": "潘章一",
+            "email": "373500914@qq.com.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ThinkCar\\DingTalk\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ThinkCar\\DingTalk\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ThinkCar\\DingTalk\\DingTalkServiceProvider"
+            ],
+            "aliases": {
+                "DingAuth": "ThinkCar\\DingTalk\\Facades\\DingAuth",
+                "Robot": "ThinkCar\\DingTalk\\Facades\\Robot",
+                "WorkNotice": "ThinkCar\\DingTalk\\Facades\\WorkNotice"
+            }
+        }
+    }
+}
