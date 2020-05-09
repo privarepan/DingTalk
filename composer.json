@@ -10,12 +10,12 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "ThinkCar\\DingTalk\\": "src/"
+            "ThinkCar\\DingTalk\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ThinkCar\\DingTalk\\Tests\\": "tests/"
+            "ThinkCar\\DingTalk\\Tests\\": "tests"
         }
     },
     "extra": {
