@@ -69,7 +69,7 @@ $response->getOrigin();
     // @18612345678 的用户, 第二个参数，与你的消息内容字段一致，第三个参数为true和false，默认false, true:表示@所有人,false:表示不@所有人
     $markdown->At('18612345678','text'); 
     $markdown->addContent("我的小可爱",'text'); //同text 支持链式调用，第二个参数为发送内容的字段名称
-    app('robot')->push($markdown);
+    app('ding.robot')->push($markdown);
 
 ```
 
@@ -159,7 +159,7 @@ $response->getOrigin();
 ## voice
 ```php
     $voice = new Voice($content['media_id' => 'media_id','duration' => 10]);
-    $response = app('work-notice')->push($voice);
+    $response = app('ding.work-notice')->push($voice);
     // 判断是否推送成功
     $response->isSuccess():bool;
 ```
