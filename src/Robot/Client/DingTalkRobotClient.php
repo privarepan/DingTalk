@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Log;
 use ThinkCar\DingTalk\Robot\Message\Message;
 
 class DingTalkRobotClient
@@ -36,6 +37,10 @@ class DingTalkRobotClient
         $this->client = app('ding.http');
     }
 
+    /** 切换机器人 通过配置文件里面name
+     * @param $name
+     * @return $this
+     */
     public function setRobot($name)
     {
         if ($config = config('ding.robot.' . $name, null)) {
@@ -45,7 +50,11 @@ class DingTalkRobotClient
         return $this;
     }
 
-    public function buildSign($config) :array
+    /** 设置签名
+     * @param $config
+     * @return array
+     */
+    protected function buildSign($config) :array
     {
         $now = now();
         $timestamp = $now->timestamp.$now->milli;
@@ -59,13 +68,18 @@ class DingTalkRobotClient
     protected function setRequest(Message $message,$method,$uri)
     {
         $request =  new Request($method,$this->base_uri.$uri, [
-                'Content-Type' => 'application/json'
-            ],
+            'Content-Type' => 'application/json'
+        ],
             $message
         );
         return $request;
     }
 
+    /** 推送消息
+     * @param Message $message
+     * @return \Illuminate\Support\Collection
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function push(Message $message)
     {
         $request = $this->setRequest($message,'post','/send');
@@ -75,7 +89,8 @@ class DingTalkRobotClient
             return collect($data) ;
         } catch (RequestException $exception) {
             if ($exception->hasResponse()) {
-                return json_decode($exception->getResponse()->getBody()->getContents(),true);
+                $exception->getResponse()->getBody()->getContents();
+                Log::error("钉钉机器人消息推送错误",[$exception]);
             }
         }
     }
