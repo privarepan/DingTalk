@@ -25,7 +25,7 @@ class ExampleTest extends TestCase
     {
         $text = new Text();
         $text->content = '发送内容';
-        return $this->app->make('robot')->push($text)->toArray();
+        return $this->app->make('ding.robot')->push($text)->toArray();
     }
 
     public function testActionCard1()
@@ -45,7 +45,7 @@ class ExampleTest extends TestCase
                 'actionURL' => 'https://mythinkcar.cn',
             ]
         ]);
-        $response = app('robot')->push($card);
+        $response = app('ding.robot')->push($card);
         dump($response->toArray());
         return $response;
     }
@@ -59,7 +59,7 @@ class ExampleTest extends TestCase
  Apple Store 的设计正从原来满满的科技感走向生活化，而其生活化的走向其实可以追溯到 20 年前苹果一个建立咖啡馆的计划';
         $card->singleTitle = '阅读全文';
         $card->singleURL = 'https://www.dingtalk.com/';
-        $response = app('robot')->push($card);
+        $response = app('ding.robot')->push($card);
         dump($response->toArray());
         return $response;
     }
@@ -70,7 +70,7 @@ class ExampleTest extends TestCase
         $link->title = '连接的标题';
         $link->text = '即将到来的新版本';
         $link->messageUrl = 'https://mythinkcar.cn';
-        $response = app('robot')->push($link);
+        $response = app('ding.robot')->push($link);
         dump($response->toArray());
         return $response;
     }
@@ -82,8 +82,8 @@ class ExampleTest extends TestCase
         $markdown->text = '![](https://www.mythinkcar.cn/Home/img/binner1-4.jpg)
  ### 我就是我不一样的烟火
  ';
-        $markdown->At('18674041316','text');
-        $response = app('robot')->push($markdown);
+        $markdown->At('18674041111','text');
+        $response = app('ding.robot')->push($markdown);
         dump($response->toArray());
         return $response;
     }
@@ -100,7 +100,7 @@ class ExampleTest extends TestCase
             'messageURL' => 'https://mythinkcar.cn',
             'picURL' => 'https://www.mythinkcar.cn/Home/img/binner1-4.jpg'
         ]);
-        $response = app('robot')->push($card);
+        $response = app('ding.robot')->push($card);
         dump($response->toArray());
         return $response;
     }
@@ -116,14 +116,14 @@ class ExampleTest extends TestCase
     {
         $auth = app(DingTalkAuth::class);
 
-        $userId = $auth->userId('18674041316');
+        $userId = $auth->userId('18674041111');
         dump($userId);
     }
 
     public function testGetUser()
     {
         $auth = app(DingTalkAuth::class);
-        dd($auth->user('15888406754563259'));
+        dd($auth->user('158884067545111123'));
     }
 
     public function testWorkNotice()
@@ -152,7 +152,7 @@ class ExampleTest extends TestCase
             'file_count' => 0,
             'author' => 'pan zhang yi',
         ];
-        $oa->addReceivers(['15888406754563259']);
+        $oa->addReceivers(['158884067545631111']);
 //        dd((string)($oa));
         dd(WorkNotice::push($oa));
     }
