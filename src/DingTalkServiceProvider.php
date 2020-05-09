@@ -9,7 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use ThinkCar\DingTalk\Notice\WorkNoticeClient;
 use ThinkCar\DingTalk\Robot\Client\DingTalkRobotClient;
 
-class DingTalkServiceProvide extends ServiceProvider
+class DingTalkServiceProvider extends ServiceProvider
 {
     public function boot()
     {
