@@ -9,6 +9,7 @@
 # 安装
 
 `composer require thinkcar/dingtalk`
+`php artisan vendor:publish --provider="ThinkCar\DingTalk\DingTalkServiceProvider"`
 
 # 机器人
 
