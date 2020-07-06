@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aae76620-0153-4002-9b0d-4ff4f3178379" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Notice/Auth/DingTalkAuth.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Notice/Auth/DingTalkAuth.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +28,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\code\DingTalk" />
+    </key>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -38,7 +44,7 @@
       <option name="presentableId" value="Default" />
       <updated>1593573893169</updated>
       <workItem from="1593573894302" duration="1023000" />
-      <workItem from="1594023755100" duration="34000" />
+      <workItem from="1594023755100" duration="109000" />
     </task>
     <servers />
   </component>
