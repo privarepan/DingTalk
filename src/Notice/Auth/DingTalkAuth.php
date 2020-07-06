@@ -65,5 +65,20 @@ class DingTalkAuth
         return $data['userid'];
     }
 
+    public function getUseridByUnionid($unionid)
+    {
+        $response = $this->client->get($this->base_uri . '/user/getUseridByUnionid',[
+            'query' => [
+                'access_token' => $this->token(),
+                'unionid' => $unionid,
+            ]
+        ])->getBody()->getContents();
+        $data = json_decode($response,true);
+        if ($data['errcode'] !== 0) {
+            throw new \Exception("钉钉userId获取失败", $data['errcode']);
+        }
+        return $data['userid'];
+    }
+
 
 }
