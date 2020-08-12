@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\ThinkCar\DingTalk\Message;
+namespace ThinkCar\DingTalk\Robot\Message;
 
 
 class Image extends Message

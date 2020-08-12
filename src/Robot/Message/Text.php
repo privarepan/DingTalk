@@ -4,7 +4,6 @@
 namespace ThinkCar\DingTalk\Robot\Message;
 
 
-use http\Exception\InvalidArgumentException;
 use ThinkCar\DingTalk\Atable;
 
 class Text extends Message
