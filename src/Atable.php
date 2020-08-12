@@ -35,4 +35,10 @@ trait Atable
             return $this;
         }
     }
+
+    public function AtAll()
+    {
+        $this->message['at']['isAtAll'] = true;
+        return $this;
+    }
 }
