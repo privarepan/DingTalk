@@ -19,8 +19,6 @@ trait Atable
 
     public function At($mobiles, $field = 'content', $isAtAll = false)
     {
-        $this->message['at']['isAtAll'] = $isAtAll;
-
         if (is_array($mobiles)) {
             foreach ($mobiles as $mobile) {
                 $this->addContent('@' . $mobiles . ' ',$field);
